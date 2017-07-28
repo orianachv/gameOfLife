@@ -1,15 +1,15 @@
 var gameOfLife = {
-  
-  width: 12, 
-  height: 12, // width and height dimensions of the board
-  stepInterval: null, // should be used to hold reference to an interval that is "playing" the game
+
+  width: 12,
+  height: 12, // dimensiones alto y ancho del tablero
+  stepInterval: null, // debería ser usada para guardar referencia a una intervalo que esta siendo jugado
 
   createAndShowBoard: function () {
-    
-    // create <table> element
+
+    // crea el elemento <table>
     var goltable = document.createElement("tbody");
-    
-    // build Table HTML
+
+    // Construye la Tabla HTML
     var tablehtml = '';
     for (var h=0; h<this.height; h++) {
       tablehtml += "<tr id='row+" + h + "'>";
@@ -19,44 +19,43 @@ var gameOfLife = {
       tablehtml += "</tr>";
     }
     goltable.innerHTML = tablehtml;
-    
-    // add table to the #board element
+
+    // agrega la tabla a #board
     var board = document.getElementById('board');
     board.appendChild(goltable);
-    
-    // once html elements are added to the page, attach events to them
+    // una vez que los elementos html son añadidos a la pagina le añadimos los eventos
     this.setupBoardEvents();
   },
 
   forEachCell: function (iteratorFunc) {
-    /* 
-      Write forEachCell here. You will have to visit
-      each cell on the board, call the "iteratorFunc" function,
-      and pass into func, the cell and the cell's x & y
-      coordinates. For example: iteratorFunc(cell, x, y)
+    /*
+      Escribe forEachCell aquí. Vas a necesitar visitar
+      cada celda en el tablero, llama la "iteratorFunc",
+      y pasa a la funcion, la celda y la coordenadas x & y
+      de la celda. Por ejemplo: iteratorFunc(cell, x, y)
     */
   },
-  
+
   setupBoardEvents: function() {
-    // each board cell has an CSS id in the format of: "x-y" 
-    // where x is the x-coordinate and y the y-coordinate
-    // use this fact to loop through all the ids and assign
-    // them "click" events that allow a user to click on 
-    // cells to setup the initial state of the game
-    // before clicking "Step" or "Auto-Play"
-    
-    // clicking on a cell should toggle the cell between "alive" & "dead"
-    // for ex: an "alive" cell be colored "blue", a dead cell could stay white
-    
-    // EXAMPLE FOR ONE CELL
-    // Here is how we would catch a click event on just the 0-0 cell
-    // You need to add the click event on EVERY cell on the board
-    
+    // cada celda del tablero tiene un id CSS en el formato "x-y"
+    // donde x es la coordinada-x e y es la coordenada-y
+    // usa este hecho para loopear a traves de todos los ids y asignales
+    // "click" events que permite a un usuario clickear en
+    // celdas para configurar el estado inicial del juego
+    // antes de clickear  "Step" o "Auto-Play"
+
+    // clickear en una celda deberia alternar la celda entre "alive" y "dead"
+    // por ejemplo: una celda "alive"  este pintado de azul, y una celda "dead" puede mantenerse blanco
+
+    // EJEMPLO PARA UNA CELDA
+    // Aquí esta como tendríamos un click event en sol una celda 0-0
+    // Necesitas agregar el click event en cada celda en el tablero
+
     var onCellClick = function (e) {
-      
-      // QUESTION TO ASK YOURSELF: What is "this" equal to here?
-      
-      // how to set the style of the cell when it's clicked
+
+      // Pregunta para hacerte a ti mismo: Que es this en este contexto?
+
+      // como setear el estilo de la celda cuando es clickeada
       if (this.dataset.status == 'dead') {
         this.className = 'alive';
         this.dataset.status = 'alive';
@@ -64,29 +63,29 @@ var gameOfLife = {
         this.className = 'dead';
         this.dataset.status = 'dead';
       }
-      
+
     };
-    
+
     var cell00 = document.getElementById('0-0');
     cell00.addEventListener('click', onCellClick);
   },
 
   step: function () {
-    // Here is where you want to loop through all the cells
-    // on the board and determine, based on it's neighbors,
-    // whether the cell should be dead or alive in the next
-    // evolution of the game. 
-    //
-    // You need to:
-    // 1. Count alive neighbors for all cells
-    // 2. Set the next state of all cells based on their alive neighbors
+    // Acá es donde querés loopear a través de las celdas
+    // en el tablero y determina, basado en tus vecinos,
+    // si la celda debe estar viva o muerta en la siguiente
+    // evolución del juego.
+
+    // Necesitas:
+    // 1. Cuenta vecinos vivos para todas las celdas
+    // 2. Sete el siguiente estado de todas las celdas basado en las vecinas vivas
   },
 
   enableAutoPlay: function () {
-    // Start Auto-Play by running the 'step' function
-    // automatically repeatedly every fixed time interval  
+    // Comienza Auto-Play corriendo la función step
+    // automaticamente de forma reptida cada intervalo de tiempo fijo
   }
-  
+
 };
 
 gameOfLife.createAndShowBoard();
